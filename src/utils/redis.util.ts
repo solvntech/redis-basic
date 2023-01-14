@@ -1,4 +1,5 @@
 import { createClient, RedisClientType } from 'redis';
+import { LoggerUtil } from '@utils/logger.util';
 
 export class RedisUtil {
     private static _Instance: RedisClientType = null as any;
@@ -11,11 +12,11 @@ export class RedisUtil {
         });
         instance.connect().then(
             () => {
-                console.log(`⚡️[Redis]: connected!`);
+                LoggerUtil.info(`⚡️[Redis]: connected!`);
                 RedisUtil._Instance = instance;
             },
             (reason) => {
-                console.error(`[Redis]: Connect failed. reason: ${reason}`);
+                LoggerUtil.error(`[Redis]: Connect failed. reason: ${reason}`);
             }
         )
     }
